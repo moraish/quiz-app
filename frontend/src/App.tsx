@@ -5,6 +5,7 @@ import Quiz from "./pages/Quiz";
 import Leaderboard from "./pages/Leaderboard";
 import Footer from "./components/Footer";
 import FooterSmall from "./components/FooterSmall";
+import Profile from "./pages/Profile";
 
 function App() {
   const location = useLocation();
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/quiz" element={<Quiz />} />
         <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       {location.pathname === '/' ? <Footer /> : <FooterSmall />}
     </div>
