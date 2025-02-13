@@ -12,10 +12,12 @@ export default function QuestionCard({ question_number, total_questions, questio
                     <h2 className="sm:text-xl font-semibold">Question {question_number} of {total_questions}</h2>
                 </div>
                 <div className="flex flex-col justify-center">
-                    <Progress_chart quiz_status={quizStatus} />
+                    <ProgressChart quiz_status={quizStatus} />
                 </div>
             </div>
             {/* Question Container */}
+
+
             <div className="max-w-4xl mx-auto mb-8">
                 <div className="p-6 m-4 bg-white rounded-lg shadow-lg border border-gray-200">
                     <h2 className="text-xl font-semibold text-center leading-relaxed">
@@ -49,7 +51,7 @@ export default function QuestionCard({ question_number, total_questions, questio
 
 
 // define an interface quiz_status
-function Progress_chart({ quiz_status }) {
+function ProgressChart({ quiz_status }) {
     function calculate_progress() {
         if (!quiz_status || quiz_status.length === 0) return 0;
 
@@ -99,7 +101,10 @@ function Progress_chart({ quiz_status }) {
     );
 };
 
-const OptionCard = ({ text, label }) => {
+const OptionCard = ({ text, label }: {
+    text: string,
+    label: string
+}) => {
     return (
         <button className="w-full text-left transition-all duration-200 group">
             <div className="h-24 p-4 bg-white rounded-lg border border-gray-200 hover:bg-blue-50 hover:border-blue-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-sm">
@@ -133,5 +138,4 @@ function QuestionToggle() {
         </div>
     )
 }
-
 

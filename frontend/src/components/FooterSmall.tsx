@@ -1,6 +1,6 @@
 export default function FooterSmall() {
     return (
-        <footer className="fixed bottom-0 left-0 right-0 bg-black text-white py-4 text-sm">
+        <footer className=" bottom-0 left-0 right-0 bg-black text-white py-4 text-sm">
             {/* Bottom Row */}
             <div className="flex justify-between px-12">
                 <div className="text-gray-400">
