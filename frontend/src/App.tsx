@@ -6,15 +6,15 @@ import Leaderboard from "./pages/Leaderboard";
 import Footer from "./components/Footer";
 import FooterSmall from "./components/FooterSmall";
 import Profile from "./pages/Profile";
-import ReviewCard from "./components/ReviewCard";
+import ReviewCard from "./pages/ReviewCard";
 
 function App() {
   const location = useLocation();
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <AppBar />
-      <div className="pt-20 ">
+      <div className="flex-grow py-20">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/quiz" element={<Quiz />} />
