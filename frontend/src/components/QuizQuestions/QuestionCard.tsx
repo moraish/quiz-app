@@ -2,7 +2,15 @@ import OptionCard from "./OptionsCard";
 import ProgressChart from "./ProgressChart";
 import QuestionToggle from "./QuestionToggle";
 
-export default function QuestionCard({ question_number, total_questions, question_text, option_a, option_b, option_c, option_d, quizStatus, setQuizStatus }) {
+export default function QuestionCard({ question_number, total_questions, question_text, option_a, option_b, option_c, option_d, quizStatus, setQuizStatus }: {
+    question_number: number,
+    total_questions: number,
+    question_text: string,
+    option_a: string,
+    option_b: string,
+    option_c: string,
+    option_d: string
+}) {
     return (
         <div className="flex justify-center items-center flex-grow">
             <div className="container mx-auto px-4 py-8 font-mono">
