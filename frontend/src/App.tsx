@@ -3,10 +3,11 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from "./pages/Home";
 import Quiz from "./pages/Quiz";
 import Leaderboard from "./pages/Leaderboard";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 import FooterSmall from "./components/FooterSmall";
 import Profile from "./pages/Profile";
 import ReviewCard from "./pages/ReviewCard";
+import Footer from "./components/Landing/Footer";
 
 function App() {
   const location = useLocation();
@@ -14,7 +15,7 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <AppBar />
-      <div className="flex-grow py-20">
+      <div className="flex-grow pb-20">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/quiz" element={<Quiz />} />
@@ -30,4 +31,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

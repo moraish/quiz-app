@@ -1,4 +1,6 @@
 import { BookOpen, Upload, Sparkles } from 'lucide-react';
+import TrustedBy from '../components/Landing/TrustedBy';
+import Banner from '../components/Landing/Banner';
 
 const Home = () => {
     const features = [
@@ -23,9 +25,12 @@ const Home = () => {
     ];
 
     return (
-        <div className="flex flex-col">
-            <div className='flex'>
-                <main className="flex-grow bg-red-200 h-auto">
+        <div className="flex flex-col flex-grow h-full justify-center">
+            <div>
+                <Banner />
+            </div>
+            <div className='flex py-20'>
+                <main className="flex-grow">
                     <div className="max-w-6xl mx-auto px-4 pt-16">
                         <div className="grid md:grid-cols-3 gap-8">
                             {features.map((feature) => (
@@ -57,12 +62,13 @@ const Home = () => {
                             ))}
                         </div>
                     </div>
-
                 </main>
 
             </div>
+
+            <div className="m-3" />
             {/* Trusted By Section */}
-            <div>
+            <div className=''>
                 <TrustedBy />
             </div>
 
@@ -73,8 +79,3 @@ const Home = () => {
 export default Home;
 
 
-function TrustedBy() {
-    return (
-        <div>Trusted By</div>
-    )
-}
