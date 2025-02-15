@@ -115,40 +115,41 @@ export default function Profile() {
     );
 
     return (
-        <div className="min-h-screen bg-gray-50 py-8 px-4">
+        <div className="bg-gray-50 py-8 px-4 mt-20">
             <div className="max-w-4xl mx-auto">
-                <div className="bg-white rounded-lg shadow-sm">
-                    <div className="px-6 py-4 border-b">
-                        <h1 className="text-xl font-semibold text-gray-900">Profile</h1>
+                <div className="bg-white rounded-lg shadow-md">
+                    {/* Header */}
+                    <div className="px-6 py-4 bg-black text-white rounded-t-lg">
+                        <h1 className="text-xl font-semibold">Profile</h1>
                     </div>
 
                     <div className="p-6">
                         <div className="flex flex-col md:flex-row gap-8">
                             {/* Left Column - Avatar and Bio */}
                             <div className="md:w-1/3 flex flex-col items-center space-y-6">
-                                <div className="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl font-semibold">
+                                <div className="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center text-gray-900 text-2xl font-semibold border-2 border-black">
                                     {profile.first_name[0]}
                                     {profile.last_name[0]}
                                 </div>
                                 <div className="text-center w-full">
-                                    <h2 className="text-base font-medium text-gray-900">
+                                    <h2 className="text-lg font-semibold text-gray-900">
                                         {profile.first_name} {profile.last_name}
                                     </h2>
-                                    <p className="text-sm text-gray-500">{profile.username}</p>
+                                    <p className="text-sm text-gray-600">{profile.username}</p>
                                 </div>
-                                {/* <div className="border-b h-1 w-full "></div> */}
-                                <div className="mt-6 w-full">
+                                <div className="w-full h-px bg-gray-200" />
+                                <div className="w-full">
                                     {renderField('bio')}
                                 </div>
                             </div>
 
                             {/* Right Column - Profile Fields */}
                             <div className="md:w-2/3">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                     {(Object.keys(profile) as Array<keyof ProfileField>)
                                         .filter(field => field !== 'bio')
                                         .map((field) => (
-                                            <div key={field}>
+                                            <div key={field} className="bg-gray-50 p-4 rounded-lg">
                                                 {renderField(field)}
                                             </div>
                                         ))}
@@ -156,11 +157,12 @@ export default function Profile() {
                             </div>
                         </div>
 
-                        {/* Update Button Section - Always visible */}
-                        <div className="mt-6 flex justify-end space-x-3 border-t pt-4">
+                        {/* Update Button Section */}
+                        <div className="mt-8 flex justify-end space-x-4 border-t border-gray-200 pt-6">
                             <button
                                 onClick={handleCancel}
-                                className={`px-4 py-2 text-sm text-gray-700 hover:text-gray-900 transition-colors duration-150
+                                className={`px-6 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 
+                                    transition-colors duration-300 border border-gray-300 rounded-lg
                                     ${!hasChanges && 'opacity-50 cursor-not-allowed'}`}
                                 disabled={!hasChanges}
                             >
@@ -168,7 +170,8 @@ export default function Profile() {
                             </button>
                             <button
                                 onClick={handleUpdate}
-                                className={`px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors duration-150
+                                className={`px-6 py-2 bg-black text-white text-sm font-medium rounded-lg 
+                                    hover:bg-gray-800 transition-colors duration-300
                                     ${!hasChanges && 'opacity-50 cursor-not-allowed'}`}
                                 disabled={!hasChanges}
                             >

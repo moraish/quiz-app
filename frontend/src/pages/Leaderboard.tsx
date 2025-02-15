@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Trophy } from "lucide-react"
 
 interface User {
     rank: number
@@ -12,31 +13,14 @@ interface User {
 const users: User[] = [
     { rank: 1, name: "Alice Johnson", points: 1500, country: "USA", school: "Harvard University", category: "Science" },
     { rank: 2, name: "Bob Smith", points: 1450, country: "UK", school: "Oxford University", category: "History" },
-    {
-        rank: 3,
-        name: "Charlie Brown",
-        points: 1400,
-        country: "Canada",
-        school: "University of Toronto",
-        category: "Math",
-    },
-    {
-        rank: 4,
-        name: "Diana Prince",
-        points: 1350,
-        country: "Australia",
-        school: "University of Melbourne",
-        category: "Literature",
-    },
-    {
-        rank: 5,
-        name: "Ethan Hunt",
-        points: 1300,
-        country: "New Zealand",
-        school: "University of Auckland",
-        category: "Geography",
-    },
+    { rank: 3, name: "Charlie Brown", points: 1400, country: "Canada", school: "University of Toronto", category: "Math" },
+    { rank: 4, name: "Diana Prince", points: 1350, country: "Australia", school: "University of Melbourne", category: "Literature" },
+    { rank: 5, name: "Ethan Hunt", points: 1300, country: "New Zealand", school: "University of Auckland", category: "Geography" },
 ]
+
+const categories = ["Science", "History", "Math", "Literature", "Geography"]
+const countries = ["USA", "UK", "Canada", "Australia", "New Zealand"]
+const schools = ["Harvard University", "Oxford University", "University of Toronto", "University of Melbourne", "University of Auckland"]
 
 export default function LeaderboardPage() {
     const [filter, setFilter] = useState({ category: "", country: "", school: "" })
@@ -45,73 +29,85 @@ export default function LeaderboardPage() {
         (user) =>
             (filter.category === "" || user.category === filter.category) &&
             (filter.country === "" || user.country === filter.country) &&
-            (filter.school === "" || user.school === filter.school),
+            (filter.school === "" || user.school === filter.school)
     )
 
     return (
-        <div className="min-h-screen flex flex-col bg-gradient-to-b from-[#202020] to-[#252525]">
-            <main className="flex-grow flex justify-center p-4">
-                <div className="w-full max-w-4xl">
-                    <h1 className="text-3xl font-bold text-white mb-6">Leaderboard</h1>
-                    <div className="mb-4 flex space-x-4">
+        <div className="bg-white mt-20">
+            <main className="max-w-7xl mx-auto px-4 py-8">
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                    <h2 className="text-2xl font-bold text-black mb-6">Leaderboard Rankings</h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                         <select
                             value={filter.category}
                             onChange={(e) => setFilter({ ...filter, category: e.target.value })}
-                            className="bg-gray-700 text-white rounded px-2 py-1"
+                            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
                         >
                             <option value="">All Categories</option>
-                            <option value="Science">Science</option>
-                            <option value="History">History</option>
-                            <option value="Math">Math</option>
-                            <option value="Literature">Literature</option>
-                            <option value="Geography">Geography</option>
+                            {categories.map((category) => (
+                                <option key={category} value={category}>
+                                    {category}
+                                </option>
+                            ))}
                         </select>
+
                         <select
                             value={filter.country}
                             onChange={(e) => setFilter({ ...filter, country: e.target.value })}
-                            className="bg-gray-700 text-white rounded px-2 py-1"
+                            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
                         >
                             <option value="">All Countries</option>
-                            <option value="USA">USA</option>
-                            <option value="UK">UK</option>
-                            <option value="Canada">Canada</option>
-                            <option value="Australia">Australia</option>
-                            <option value="New Zealand">New Zealand</option>
+                            {countries.map((country) => (
+                                <option key={country} value={country}>
+                                    {country}
+                                </option>
+                            ))}
                         </select>
+
                         <select
                             value={filter.school}
                             onChange={(e) => setFilter({ ...filter, school: e.target.value })}
-                            className="bg-gray-700 text-white rounded px-2 py-1"
+                            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
                         >
                             <option value="">All Schools</option>
-                            <option value="Harvard University">Harvard University</option>
-                            <option value="Oxford University">Oxford University</option>
-                            <option value="University of Toronto">University of Toronto</option>
-                            <option value="University of Melbourne">University of Melbourne</option>
-                            <option value="University of Auckland">University of Auckland</option>
+                            {schools.map((school) => (
+                                <option key={school} value={school}>
+                                    {school}
+                                </option>
+                            ))}
                         </select>
                     </div>
-                    <div className="bg-black rounded-lg shadow-lg overflow-hidden">
+
+                    <div className="overflow-x-auto rounded-lg border border-gray-200">
                         <table className="w-full">
                             <thead>
-                                <tr className="bg-gray-800 text-white">
-                                    <th className="px-4 py-2">Rank</th>
-                                    <th className="px-4 py-2">Name</th>
-                                    <th className="px-4 py-2">Points</th>
-                                    <th className="px-4 py-2">Country</th>
-                                    <th className="px-4 py-2">School</th>
-                                    <th className="px-4 py-2">Category</th>
+                                <tr className="bg-black text-white">
+                                    <th className="px-6 py-3 text-left font-semibold">Rank</th>
+                                    <th className="px-6 py-3 text-left font-semibold">Name</th>
+                                    <th className="px-6 py-3 text-left font-semibold">Points</th>
+                                    <th className="px-6 py-3 text-left font-semibold">Country</th>
+                                    <th className="px-6 py-3 text-left font-semibold">School</th>
+                                    <th className="px-6 py-3 text-left font-semibold">Category</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {filteredUsers.map((user) => (
-                                    <tr key={user.rank} className="border-b border-gray-700 text-white">
-                                        <td className="px-4 py-2">{user.rank}</td>
-                                        <td className="px-4 py-2">{user.name}</td>
-                                        <td className="px-4 py-2">{user.points}</td>
-                                        <td className="px-4 py-2">{user.country}</td>
-                                        <td className="px-4 py-2">{user.school}</td>
-                                        <td className="px-4 py-2">{user.category}</td>
+                                {filteredUsers.map((user, index) => (
+                                    <tr
+                                        key={user.rank}
+                                        className={`border-b border-gray-200 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                                            }`}
+                                    >
+                                        <td className="px-6 py-4">
+                                            <span className="font-semibold">
+                                                #{user.rank}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 font-medium">{user.name}</td>
+                                        <td className="px-6 py-4">{user.points.toLocaleString()}</td>
+                                        <td className="px-6 py-4">{user.country}</td>
+                                        <td className="px-6 py-4">{user.school}</td>
+                                        <td className="px-6 py-4">{user.category}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -122,4 +118,3 @@ export default function LeaderboardPage() {
         </div>
     )
 }
-
