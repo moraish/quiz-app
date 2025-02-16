@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Trophy } from "lucide-react"
 
 interface User {
     rank: number

@@ -9,6 +9,7 @@ import Profile from "./pages/Profile";
 import ReviewCard from "./pages/ReviewCard";
 import Footer from "./components/Landing/Footer";
 import Pricing from "./pages/Pricing";
+import Signup from "./pages/SignUp";
 
 function App() {
   const location = useLocation();
@@ -16,13 +17,14 @@ function App() {
   return (
     <div className="flex flex-col min-h-screen">
       <AppBar />
-      <div className="flex-grow pb-20">
+      <div className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/signup" element={<Signup />} />
           {/* To be removed */}
           <Route path="/review" element={<ReviewCard />} />
         </Routes>

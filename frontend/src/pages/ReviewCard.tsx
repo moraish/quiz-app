@@ -5,7 +5,7 @@ import SubmitQuiz from "../components/QuizReview/SubmitQuiz";
 export default function ReviewCard() {
     return (
         <div>
-            <div className="flex justify-center min-h-0 flex-grow">
+            <div className="flex justify-center m-20 flex-grow">
                 <div className="flex flex-col justify-center w-11/12 sm:w-9/12">
 
                     {/* Review Summary Container */}

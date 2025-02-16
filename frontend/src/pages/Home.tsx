@@ -29,9 +29,9 @@ const Home = () => {
             <div>
                 <Banner />
             </div>
-            <div className='flex py-20'>
+            <div className='flex py-15'>
                 <main className="flex-grow">
-                    <div className="max-w-6xl mx-auto px-4 pt-16">
+                    <div className="max-w-6xl mx-auto px-4 pt-8">
                         <div className="grid md:grid-cols-3 gap-8">
                             {features.map((feature) => (
                                 <div
@@ -39,21 +39,21 @@ const Home = () => {
                                     className="bg-white rounded-lg shadow-md hover:shadow-xl"
                                 >
                                     <div className="p-6">
-                                        <div className="mb-4">
+                                        <div className="mb-4 flex justify-center">
                                             <feature.icon className="w-12 h-12 text-black p-2 bg-gray-100 rounded-lg" />
                                         </div>
 
-                                        <h3 className="text-2xl font-semibold mb-3 text-gray-900">
+                                        <h3 className="text-2xl font-semibold mb-3 text-gray-900 flex justify-center">
                                             {feature.title}
                                         </h3>
 
-                                        <p className="text-gray-600 mb-6 h-20">
+                                        <p className="text-gray-600 mb-2 h-20">
                                             {feature.description}
                                         </p>
 
                                         <button
                                             className="w-full py-3 px-4 bg-black text-white rounded-lg font-medium 
-                                                 hover:bg-gray-800 transition-colors duration-300"
+                                                 hover:bg-gray-600 transition-colors duration-300"
                                         >
                                             Get Started
                                         </button>
@@ -68,7 +68,7 @@ const Home = () => {
 
             <div className="m-3" />
             {/* Trusted By Section */}
-            <div className=''>
+            <div className='pb-20'>
                 <TrustedBy />
             </div>
 
