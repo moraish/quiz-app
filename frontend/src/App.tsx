@@ -8,6 +8,7 @@ import FooterSmall from "./components/FooterSmall";
 import Profile from "./pages/Profile";
 import ReviewCard from "./pages/ReviewCard";
 import Footer from "./components/Landing/Footer";
+import Pricing from "./pages/Pricing";
 
 function App() {
   const location = useLocation();
@@ -21,6 +22,7 @@ function App() {
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/pricing" element={<Pricing />} />
           {/* To be removed */}
           <Route path="/review" element={<ReviewCard />} />
         </Routes>
