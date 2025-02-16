@@ -4,34 +4,32 @@ export default function ReviewSummary() {
     return (
         <div className="m-4">
             <div className="bg-white rounded-lg shadow-lg border border-gray-200">
-                <h2 className="mt-2 text-xl font-bold text-center leading-relaxed">
+                <h2 className="bg-black text-white py-4 text-xl font-bold text-center leading-relaxed rounded-t-lg">
                     Quiz Summary
                 </h2>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
                     {/* Total Questions Tile */}
-                    <div className="p-4 bg-blue-50 rounded-lg border border-blue-200 flex flex-col items-center">
-                        {/* <span className="text-3xl font-bold text-blue-600 mb-2">100</span> */}
-                        <Counter value={100} color='text-blue-600' />
-                        <span className="text-sm text-blue-700">Total Questions</span>
+                    <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-col items-center hover:shadow-md transition-shadow">
+                        <Counter value={100} color='text-black' />
+                        <span className="text-sm text-gray-700">Total Questions</span>
                     </div>
 
                     {/* Questions Attempted Tile */}
-                    <div className="p-4 bg-green-50 rounded-lg border border-green-200 flex flex-col items-center">
-                        {/* <span className="text-3xl font-bold text-green-600 mb-2">21</span> */}
-                        <Counter value={21} color="text-green-600" />
-                        <span className="text-sm text-green-700">Questions Attempted</span>
+                    <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-col items-center hover:shadow-md transition-shadow">
+                        <Counter value={21} color="text-black" />
+                        <span className="text-sm text-gray-700">Questions Attempted</span>
                     </div>
 
                     {/* Marked for Review Tile */}
-                    <div className="p-4 bg-yellow-50 rounded-lg border border-yellow-200 flex flex-col items-center">
-                        <Counter value={4} color="text-yellow-600" />
-                        <span className="text-sm text-yellow-700">Marked for Review</span>
+                    <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-col items-center hover:shadow-md transition-shadow">
+                        <Counter value={4} color="text-black" />
+                        <span className="text-sm text-gray-700">Marked for Review</span>
                     </div>
 
                     {/* Questions Skipped Tile */}
-                    <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-col items-center">
-                        <Counter value={17} color="text-gray-600" />
+                    <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-col items-center hover:shadow-md transition-shadow">
+                        <Counter value={17} color="text-black" />
                         <span className="text-sm text-gray-700">Questions Skipped</span>
                     </div>
                 </div>
