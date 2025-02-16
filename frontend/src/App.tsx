@@ -10,6 +10,8 @@ import ReviewCard from "./pages/ReviewCard";
 import Footer from "./components/Landing/Footer";
 import Pricing from "./pages/Pricing";
 import Signup from "./pages/SignUp";
+import Signin from "./pages/Signin";
+import SigninPage from "./pages/SigninPage";
 
 function App() {
   const location = useLocation();
@@ -25,8 +27,10 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Signin />} />
           {/* To be removed */}
           <Route path="/review" element={<ReviewCard />} />
+          <Route path="/signinpage" element={<SigninPage />} />
         </Routes>
       </div>
       {location.pathname === '/' ? <Footer /> : <FooterSmall />}

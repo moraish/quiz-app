@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import { Eye, EyeOff, ArrowRight } from 'lucide-react';
 
-const Signup = () => {
+const Signin = () => {
     const [formData, setFormData] = useState({
-        firstName: '',
-        lastName: '',
-        organization: '',
         email: '',
         password: ''
     });
@@ -26,9 +23,6 @@ const Signup = () => {
 
     const validateForm = () => {
         const newErrors = {};
-        if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
-        if (!formData.lastName.trim()) newErrors.lastName = 'Last name is required';
-        if (!formData.organization.trim()) newErrors.organization = 'Organization is required';
         if (!formData.email.trim()) {
             newErrors.email = 'Email is required';
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -36,8 +30,6 @@ const Signup = () => {
         }
         if (!formData.password) {
             newErrors.password = 'Password is required';
-        } else if (formData.password.length < 8) {
-            newErrors.password = 'Password must be at least 8 characters';
         }
         return newErrors;
     };
@@ -64,76 +56,26 @@ const Signup = () => {
                 />
                 <div className="relative z-20 flex flex-col justify-center px-12 w-full">
                     <h2 className="text-4xl font-bold text-white mb-6">
-                        Join the Future of Interactive Learning
+                        Welcome Back
                     </h2>
                     <p className="text-xl text-gray-200 mb-8">
-                        "Education is not just about going to school and getting a degree. It's about widening your knowledge and absorbing the truth about life."
+                        "The beautiful thing about learning is that no one can take it away from you."
                     </p>
                     <p className="text-gray-300 font-medium">
-                        - Shakuntala Devi
+                        - B.B. King
                     </p>
                 </div>
             </div>
 
-            {/* Right Side - Sign Up Form */}
-            <div className="w-full lg:w-1/2 flex items-center justify-center mt-12 p-8 bg-gray-50">
+            {/* Right Side - Sign In Form */}
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gray-50">
                 <div className="w-full max-w-md">
                     <div className="text-center mb-8">
-                        <h2 className="text-3xl font-bold text-gray-900">Create your account</h2>
-                        <p className="mt-2 text-gray-600">Start your journey with us today</p>
+                        <h2 className="text-3xl font-bold text-gray-900">Sign in to your account</h2>
+                        <p className="mt-2 text-gray-600">Continue your learning journey</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="grid grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    First Name
-                                </label>
-                                <input
-                                    name="firstName"
-                                    value={formData.firstName}
-                                    onChange={handleChange}
-                                    className={`w-full px-3 py-2 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-black ${errors.firstName ? 'border-red-500' : 'border-gray-300'
-                                        }`}
-                                />
-                                {errors.firstName && (
-                                    <p className="mt-1 text-red-500 text-sm">{errors.firstName}</p>
-                                )}
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">
-                                    Last Name
-                                </label>
-                                <input
-                                    name="lastName"
-                                    value={formData.lastName}
-                                    onChange={handleChange}
-                                    className={`w-full px-3 py-2 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-black ${errors.lastName ? 'border-red-500' : 'border-gray-300'
-                                        }`}
-                                />
-                                {errors.lastName && (
-                                    <p className="mt-1 text-red-500 text-sm">{errors.lastName}</p>
-                                )}
-                            </div>
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                School/Company
-                            </label>
-                            <input
-                                name="organization"
-                                value={formData.organization}
-                                onChange={handleChange}
-                                className={`w-full px-3 py-2 bg-white border rounded-lg focus:outline-none focus:ring-2 focus:ring-black ${errors.organization ? 'border-red-500' : 'border-gray-300'
-                                    }`}
-                            />
-                            {errors.organization && (
-                                <p className="mt-1 text-red-500 text-sm">{errors.organization}</p>
-                            )}
-                        </div>
-
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
                                 Email address
@@ -152,9 +94,14 @@ const Signup = () => {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                                Password
-                            </label>
+                            <div className="flex items-center justify-between mb-1">
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Password
+                                </label>
+                                <a href="/forgot-password" className="text-sm text-black hover:underline">
+                                    Forgot password?
+                                </a>
+                            </div>
                             <div className="relative">
                                 <input
                                     type={showPassword ? 'text' : 'password'}
@@ -181,19 +128,30 @@ const Signup = () => {
                             )}
                         </div>
 
+                        <div className="flex items-center">
+                            <input
+                                type="checkbox"
+                                id="remember"
+                                className="h-4 w-4 border-gray-300 rounded text-black focus:ring-black"
+                            />
+                            <label htmlFor="remember" className="ml-2 block text-sm text-gray-700">
+                                Remember me
+                            </label>
+                        </div>
+
                         <button
                             type="submit"
                             className="w-full flex items-center justify-center py-3 px-4 bg-black text-white rounded-lg font-medium 
                 hover:bg-gray-800 transition-colors duration-300 space-x-2"
                         >
-                            <span>Create Account</span>
+                            <span>Sign in</span>
                             <ArrowRight className="w-5 h-5" />
                         </button>
 
                         <p className="text-center text-gray-600">
-                            Already have an account?{' '}
-                            <a href="/signin" className="text-black font-medium hover:underline">
-                                Sign in
+                            Don't have an account?{' '}
+                            <a href="/signup" className="text-black font-medium hover:underline">
+                                Sign up
                             </a>
                         </p>
                     </form>
@@ -203,4 +161,4 @@ const Signup = () => {
     );
 };
 
-export default Signup;
+export default Signin;

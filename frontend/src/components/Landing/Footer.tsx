@@ -10,7 +10,7 @@ export default function Footer() {
                     <div>
                         <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
                         <ul className="space-y-2 text-gray-400">
-                            <li>Home</li>
+                            <li>Pricing</li>
                             <li>Play Quiz</li>
                             <li>Host Quiz</li>
                             <li>Generate Quiz</li>
