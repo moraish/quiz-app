@@ -1,14 +1,16 @@
 import { BookOpen, Upload, Sparkles } from 'lucide-react';
 import TrustedBy from '../components/Landing/TrustedBy';
 import Banner from '../components/Landing/Banner';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const navigate = useNavigate();
     const features = [
         {
             title: "Play a Quiz",
             description: "Choose from our curated categories and test your knowledge",
             icon: BookOpen,
-            path: "/play"
+            path: "/categories"
         },
         {
             title: "Host Your Quiz",
@@ -52,6 +54,9 @@ const Home = () => {
                                         </p>
 
                                         <button
+                                            onClick={() => {
+                                                navigate(feature.path)
+                                            }}
                                             className="w-full py-3 px-4 bg-black text-white rounded-lg font-medium 
                                                  hover:bg-gray-600 transition-colors duration-300"
                                         >

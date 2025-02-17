@@ -12,6 +12,7 @@ import Pricing from "./pages/Pricing";
 import Signup from "./pages/SignUp";
 import Signin from "./pages/Signin";
 import SigninPage from "./pages/SigninPage";
+import Categories from "./pages/Category";
 
 function App() {
   const location = useLocation();
@@ -31,6 +32,7 @@ function App() {
           {/* To be removed */}
           <Route path="/review" element={<ReviewCard />} />
           <Route path="/signinpage" element={<SigninPage />} />
+          <Route path="/categories" element={<Categories />} />
         </Routes>
       </div>
       {location.pathname === '/' ? <Footer /> : <FooterSmall />}
