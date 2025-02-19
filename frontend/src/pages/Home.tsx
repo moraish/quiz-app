@@ -10,19 +10,22 @@ const Home = () => {
             title: "Play a Quiz",
             description: "Choose from our curated categories and test your knowledge",
             icon: BookOpen,
-            path: "/categories"
+            path: "/categories",
+            buttonText: "Get Started"
         },
         {
             title: "Host Your Quiz",
             description: "Upload your own questions and create custom quizzes",
             icon: Upload,
-            path: "/host"
+            path: "/",
+            buttonText: "Coming Soon!"
         },
         {
             title: "Generate Quiz",
             description: "Upload a PDF or enter a topic to automatically create questions",
             icon: Sparkles,
-            path: "/generate"
+            path: "/",
+            buttonText: "Coming Soon!"
         }
     ];
 
@@ -60,7 +63,7 @@ const Home = () => {
                                             className="w-full py-3 px-4 bg-black text-white rounded-lg font-medium 
                                                  hover:bg-gray-600 transition-colors duration-300"
                                         >
-                                            Get Started
+                                            {feature.buttonText}
                                         </button>
                                     </div>
                                 </div>
