@@ -35,6 +35,7 @@ function App() {
           <Route path="/categories" element={<Categories />} />
         </Routes>
       </div>
+
       {location.pathname === '/' ? <Footer /> : <FooterSmall />}
 
     </div>
