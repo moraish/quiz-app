@@ -1,4 +1,6 @@
 import express, { Request, Response } from 'express';
+import categoryRouter from './routes/categoryRoutes';
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -9,8 +11,14 @@ app.get('/', (req: Request, res: Response) => {
     res.send('Hello World!');
 });
 
+
+app.use('/api/categories', categoryRouter);
+
+
+
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
 });
+
 
 export default app;
