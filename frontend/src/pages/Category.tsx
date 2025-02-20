@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, ChevronDown, ChevronUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Categories = () => {
     const navigate = useNavigate();
@@ -8,26 +9,21 @@ const Categories = () => {
     const [showMore, setShowMore] = useState(false);
 
     // Sample categories - in a real application, this might come from an API
-    const [categories] = useState([
-        { id: 1, name: 'History', icon: '🏛️' },
-        { id: 2, name: 'Science', icon: '🔬' },
-        { id: 3, name: 'Geography', icon: '🌍' },
-        { id: 4, name: 'Literature', icon: '📚' },
-        { id: 5, name: 'Mathematics', icon: '🧮' },
-        { id: 6, name: 'Sports', icon: '⚽' },
-        { id: 7, name: 'Entertainment', icon: '🎬' },
-        { id: 8, name: 'Technology', icon: '💻' },
-        { id: 9, name: 'Art', icon: '🎨' },
-        { id: 10, name: 'Music', icon: '🎵' },
-        { id: 11, name: 'Food', icon: '🍲' },
-        { id: 12, name: 'Politics', icon: '🏛️' },
-        { id: 13, name: 'Business', icon: '💼' },
-        { id: 14, name: 'Animals', icon: '🐾' },
-        { id: 15, name: 'Movies', icon: '🎥' },
-        { id: 16, name: 'Television', icon: '📺' },
-        { id: 17, name: 'Celebrities', icon: '🌟' },
-        { id: 18, name: 'Language', icon: '🗣️' },
-    ]);
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/api/categories');
+                setCategories(response.data);
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+                // You might want to add error handling UI here
+            }
+        };
+
+        fetchCategories();
+    }, []);
 
     // Filter categories based on search term
     const filteredCategories = categories.filter(category =>
@@ -40,7 +36,7 @@ const Categories = () => {
     };
 
     // Determine which categories to display based on showMore state
-    const displayedCategories = showMore ? filteredCategories : filteredCategories.slice(0, 10);
+    const displayedCategories = showMore ? filteredCategories : filteredCategories.slice(0, 15);
 
     return (
         <div className="pt-20 bg-white">
@@ -74,7 +70,7 @@ const Categories = () => {
                             onClick={() => handleCategorySelect(category.id)}
                             className="flex items-center px-5 py-3 bg-gray-50 hover:bg-gray-100 rounded-full border border-gray-200 hover:border-black transition-colors"
                         >
-                            <span className="mr-2">{category.icon}</span>
+                            {/* <span className="mr-2">{category.icon}</span> */}
                             <span className="font-medium">{category.name}</span>
                         </button>
                     ))}
