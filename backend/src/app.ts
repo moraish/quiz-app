@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import categoryRouter from './routes/categoryRoutes';
 import cors from 'cors';
+import questionRouter from './routes/questionRoutes';
 
 
 const app = express();
@@ -15,7 +16,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/api/categories', categoryRouter);
 
-
+app.use('/api/question', questionRouter);
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
