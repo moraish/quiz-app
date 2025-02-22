@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const Categories = () => {
     const navigate = useNavigate();
+    const [selectedCategory, setSelectedCategory] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [showMore, setShowMore] = useState(false);
 
@@ -32,7 +33,8 @@ const Categories = () => {
 
     // Handle category selection
     const handleCategorySelect = (categoryId) => {
-        navigate(`/quiz?category=${categoryId}`);
+        setSelectedCategory(categoryId);
+        navigate(`/quiz?category_id=${categoryId}`);
     };
 
     // Determine which categories to display based on showMore state
@@ -95,7 +97,10 @@ const Categories = () => {
                         </button>
                     </div>
                 )}
+
             </main>
+
+
         </div>
     );
 };

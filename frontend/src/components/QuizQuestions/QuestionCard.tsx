@@ -14,15 +14,7 @@ export default function QuestionCard({ question_number, total_questions, questio
     return (
         <div className="flex justify-center items-center flex-grow">
             <div className="container mx-auto px-4 py-8 font-mono">
-                {/* Question Heading */}
-                <div className="flex justify-around ">
-                    <div className="flex flex-col justify-center">
-                        <h2 className="sm:text-xl font-semibold">Question {question_number} of {total_questions}</h2>
-                    </div>
-                    <div className="flex flex-col justify-center">
-                        <ProgressChart quiz_status={quizStatus} />
-                    </div>
-                </div>
+
                 {/* Question Container */}
 
 
@@ -47,8 +39,7 @@ export default function QuestionCard({ question_number, total_questions, questio
 
                     </div>
                 </div>
-                {/* Navigation Container */}
-                <QuestionToggle />
+
             </div>
         </div>
     );
