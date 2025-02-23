@@ -10,12 +10,13 @@ export default function Quiz() {
     const [searchParams] = useSearchParams();
     const category_id = searchParams.get('category_id');
     const [quizStatus, setQuizStatus] = useState([]);
+    const [markedAnswers, setMarkedAnswers] = useState(0);
 
     const handleNextQuestion = () => {
         if (currentQuestion < questions.length - 1) {
             setCurrentQuestion(prev => prev + 1);
-            // Mark the current question as complete when moving to next question
-            updateQuestionStatus(currentQuestion, "complete");
+            // Mark the current question as complete when moving to next question - REMOVED
+            // updateQuestionStatus(currentQuestion, "complete");
         }
     };
 
@@ -26,16 +27,32 @@ export default function Quiz() {
     };
 
     // Function to update the status of a specific question
-    const updateQuestionStatus = (questionIndex, status) => {
+    const updateQuestionStatus = (status: string) => {
         setQuizStatus(prevStatus => {
+            console.log("prev_status", prevStatus);
+            console.log("status: ", status);
+
             const newStatus = [...prevStatus];
-            newStatus[questionIndex] = {
-                questionId: questions[questionIndex].id,
-                status: status
+            const prevQuestionStatus = newStatus[currentQuestion]?.status || "incomplete";
+
+            if (["A", "B", "C", "D"].includes(prevQuestionStatus) && status === "incomplete") {
+                setMarkedAnswers(prev => Math.max(0, prev - 1)); // Ensures it doesn't go negative
+                console.log("Decrementing markedAnswers");
+            } else if (!["A", "B", "C", "D"].includes(prevQuestionStatus) && ["A", "B", "C", "D"].includes(status)) {
+                setMarkedAnswers(prev => prev + 1);
+                console.log("Incrementing markedAnswers");
+            }
+
+            newStatus[currentQuestion] = {
+                questionId: questions[currentQuestion].id,
+                status: status // Will be 'incomplete', 'A', 'B', 'C', or 'D'
             };
+
             return newStatus;
         });
     };
+
+
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -59,8 +76,6 @@ export default function Quiz() {
                 })));
             } catch (error) {
                 console.error('Error fetching questions:', error);
-            } finally {
-                console.log("quiz_status", quizStatus)
             }
         };
 
@@ -68,6 +83,11 @@ export default function Quiz() {
             fetchQuestions();
         }
     }, [category_id]);
+
+
+    useEffect(() => {
+        console.log("Quiz Status-> ", quizStatus);
+    }, [quizStatus])
 
     if (questions.length === 0) {
 
@@ -94,7 +114,7 @@ export default function Quiz() {
                     </h2>
                 </div>
                 <div className="flex flex-col justify-center">
-                    <ProgressChart quiz_status={quizStatus} />
+                    <ProgressChart markedAnswers={markedAnswers} />
                 </div>
             </div>
 
@@ -107,7 +127,9 @@ export default function Quiz() {
                 option_b={questions[currentQuestion].option_b}
                 option_c={questions[currentQuestion].option_c}
                 option_d={questions[currentQuestion].option_d}
-            // question_id={}
+                quizStatus={quizStatus}
+                currentQuestionIndex={currentQuestion}
+                onOptionSelect={updateQuestionStatus}
             />
 
             <QuestionToggle

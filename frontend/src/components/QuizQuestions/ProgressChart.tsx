@@ -1,13 +1,6 @@
-export default function ProgressChart({ quiz_status }) {
-    function calculate_progress() {
-        if (!quiz_status || quiz_status.length === 0) return 0;
-
-        const completed = quiz_status.filter(q => q.status === "complete").length;
-        const total = quiz_status.length;
-
-        return (completed / total) * 100;
-    }
-    const progress = calculate_progress();
+export default function ProgressChart({ markedAnswers }) {
+    const totalQuestions = 10;
+    const progress = (markedAnswers / totalQuestions) * 100;
     const radius = 24; // Radius of the circle
     const strokeWidth = 8;
     const circumference = 2 * Math.PI * radius;
