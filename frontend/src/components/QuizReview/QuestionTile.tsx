@@ -1,13 +1,14 @@
 interface QuestionStatus {
     questionId: number;
-    status: "incomplete" | "A" | "B" | "C" | "D" | "marked";
+    status: "incomplete" | "A" | "B" | "C" | "D" | "marked_for_review";
 }
 
 interface QuestionContainerProps {
     quizStatus: QuestionStatus[];
+    onNavigateToQuestion: (questionIndex: number) => void;
 }
 
-export default function QuestionContainer({ quizStatus }: QuestionContainerProps) {
+export default function QuestionContainer({ quizStatus, onNavigateToQuestion }: QuestionContainerProps) {
     return (
         <div className="m-4">
             <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4">
@@ -15,8 +16,9 @@ export default function QuestionContainer({ quizStatus }: QuestionContainerProps
                     {quizStatus.map((question, index) => (
                         <QuestionTile
                             key={question.questionId}
-                            number={index + 1} // Use index + 1 for numbering
+                            number={index + 1}
                             status={question.status}
+                            onClick={() => onNavigateToQuestion(index)}
                         />
                     ))}
                 </div>
@@ -25,16 +27,13 @@ export default function QuestionContainer({ quizStatus }: QuestionContainerProps
     );
 }
 
-
-
-// Mark for review is currently not implemented!
 interface QuestionTileProps {
     number: number;
     status: "incomplete" | "A" | "B" | "C" | "D" | "marked_for_review";
+    onClick: () => void;
 }
 
-function QuestionTile({ number, status }: QuestionTileProps) {
-    // Define styling configurations for each status
+function QuestionTile({ number, status, onClick }: QuestionTileProps) {
     const styleConfig = {
         incomplete: {
             background: 'bg-gray-50',
@@ -56,21 +55,21 @@ function QuestionTile({ number, status }: QuestionTileProps) {
         }
     };
 
-    // Determine which style to use based on status
     const style =
-        status === "marked"
+        status === "marked_for_review"
             ? styleConfig.marked
             : status === "incomplete"
                 ? styleConfig.incomplete
-                : styleConfig.attempted; // All other statuses (A, B, C, D) are considered "attempted"
+                : styleConfig.attempted;
 
     return (
         <div
+            onClick={onClick}
             className={`
-          p-3 rounded-lg border flex items-center justify-center
-          cursor-pointer transition-colors duration-200
-          ${style.background} ${style.border} ${style.hover}
-        `}
+                p-3 rounded-lg border flex items-center justify-center
+                cursor-pointer transition-colors duration-200
+                ${style.background} ${style.border} ${style.hover}
+            `}
         >
             <span className={`text-lg font-semibold ${style.text}`}>
                 {number}

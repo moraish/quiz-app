@@ -14,6 +14,11 @@ export default function Quiz() {
     const [markedAnswers, setMarkedAnswers] = useState(0);
     const [isReviewing, setIsReviewing] = useState(false);
 
+    const handleNavigateToQuestion = (questionIndex: number) => {
+        setCurrentQuestion(questionIndex);
+        setIsReviewing(false);
+    };
+
     const handleNextQuestion = () => {
         if (currentQuestion < questions.length - 1) {
             setCurrentQuestion(prev => prev + 1);
@@ -91,8 +96,11 @@ export default function Quiz() {
 
     if (isReviewing) {
         return (
-            <ReviewCard quiz_status={quizStatus} />
-        )
+            <ReviewCard
+                quiz_status={quizStatus}
+                onNavigateToQuestion={handleNavigateToQuestion}
+            />
+        );
     }
 
     if (questions.length === 0) {
