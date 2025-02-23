@@ -2,7 +2,21 @@ import ReviewSummary from "../components/QuizReview/ReviewSummary";
 import QuestionContainer from "../components/QuizReview/QuestionTile";
 import SubmitQuiz from "../components/QuizReview/SubmitQuiz";
 
-export default function ReviewCard() {
+export interface QuestionStatus {
+    questionId: number;
+    status: "incomplete" | "A" | "B" | "C" | "D";
+}
+
+interface ReviewCardProps {
+    quiz_status: QuestionStatus[];
+}
+
+export default function ReviewCard({ quiz_status }: ReviewCardProps) {
+    const totalQuestions = quiz_status.length;
+    const attemptedQuestions = quiz_status.filter(q => q.status !== "incomplete").length;
+    const skippedQuestions = quiz_status.filter(q => q.status === "incomplete").length;
+
+
     return (
         <div>
             <div className="flex justify-center m-20 flex-grow">
@@ -10,11 +24,11 @@ export default function ReviewCard() {
 
                     {/* Review Summary Container */}
                     <div>
-                        <ReviewSummary />
+                        <ReviewSummary totalQuestions={totalQuestions} attemptedQuestions={attemptedQuestions} markedForReview={0} skippedQuestions={skippedQuestions} />
                     </div>
                     {/* Review Questions Container */}
                     <div>
-                        <QuestionContainer />
+                        <QuestionContainer quizStatus={quiz_status} />
                     </div>
                     {/* Submit Quiz */}
                     <div className="mb-4">
@@ -25,3 +39,13 @@ export default function ReviewCard() {
         </div>
     )
 }
+
+/* 
+question_status
+    total_questions
+    attempted_questions
+    marked_for_review = 0
+    skipped_questions
+
+
+*/

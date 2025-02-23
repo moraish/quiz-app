@@ -1,6 +1,18 @@
 import { useEffect, useState, useRef } from "react";
 
-export default function ReviewSummary() {
+interface ReviewSummaryProps {
+    totalQuestions: number;
+    attemptedQuestions: number;
+    markedForReview: number;
+    skippedQuestions: number;
+}
+
+export default function ReviewSummary({
+    totalQuestions,
+    attemptedQuestions,
+    markedForReview,
+    skippedQuestions,
+}: ReviewSummaryProps) {
     return (
         <div className="m-4">
             <div className="bg-white rounded-lg shadow-lg border border-gray-200">
@@ -11,25 +23,25 @@ export default function ReviewSummary() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
                     {/* Total Questions Tile */}
                     <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-col items-center hover:shadow-md transition-shadow">
-                        <Counter value={100} color='text-black' />
+                        <Counter value={totalQuestions} color="text-black" />
                         <span className="text-sm text-gray-700">Total Questions</span>
                     </div>
 
                     {/* Questions Attempted Tile */}
                     <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-col items-center hover:shadow-md transition-shadow">
-                        <Counter value={21} color="text-black" />
+                        <Counter value={attemptedQuestions} color="text-black" />
                         <span className="text-sm text-gray-700">Questions Attempted</span>
                     </div>
 
                     {/* Marked for Review Tile */}
                     <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-col items-center hover:shadow-md transition-shadow">
-                        <Counter value={4} color="text-black" />
+                        <Counter value={markedForReview} color="text-black" />
                         <span className="text-sm text-gray-700">Marked for Review</span>
                     </div>
 
                     {/* Questions Skipped Tile */}
                     <div className="p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-col items-center hover:shadow-md transition-shadow">
-                        <Counter value={17} color="text-black" />
+                        <Counter value={skippedQuestions} color="text-black" />
                         <span className="text-sm text-gray-700">Questions Skipped</span>
                     </div>
                 </div>

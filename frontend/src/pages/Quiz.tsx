@@ -3,6 +3,7 @@ import QuestionCard from "../components/QuizQuestions/QuestionCard";
 import { useSearchParams } from "react-router-dom";
 import QuestionToggle from "../components/QuizQuestions/QuestionToggle";
 import ProgressChart from "../components/QuizQuestions/ProgressChart";
+import ReviewCard from "./ReviewCard";
 
 export default function Quiz() {
     const [questions, setQuestions] = useState([]);
@@ -11,6 +12,7 @@ export default function Quiz() {
     const category_id = searchParams.get('category_id');
     const [quizStatus, setQuizStatus] = useState([]);
     const [markedAnswers, setMarkedAnswers] = useState(0);
+    const [isReviewing, setIsReviewing] = useState(false);
 
     const handleNextQuestion = () => {
         if (currentQuestion < questions.length - 1) {
@@ -52,7 +54,9 @@ export default function Quiz() {
         });
     };
 
-
+    function onReviewTest() {
+        setIsReviewing(true);
+    }
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -85,12 +89,13 @@ export default function Quiz() {
     }, [category_id]);
 
 
-    useEffect(() => {
-        console.log("Quiz Status-> ", quizStatus);
-    }, [quizStatus])
+    if (isReviewing) {
+        return (
+            <ReviewCard quiz_status={quizStatus} />
+        )
+    }
 
     if (questions.length === 0) {
-
         return (
             <div className="mt-25 ml-10">
                 <div role="status" className="max-w-sm animate-pulse">
@@ -137,6 +142,7 @@ export default function Quiz() {
                 onNext={handleNextQuestion}
                 isFirstQuestion={currentQuestion === 0}
                 isLastQuestion={currentQuestion === questions.length - 1}
+                onReviewTest={onReviewTest}
             />
         </div>
     );

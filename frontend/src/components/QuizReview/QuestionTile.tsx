@@ -1,19 +1,22 @@
-export default function QuestionContainer() {
-    const questions = Array.from({ length: 25 }, (_, index) => ({
-        number: index + 1,
-        status: ['attempted', 'marked', 'skipped'][Math.floor(Math.random() * 3)]
-    }));
+interface QuestionStatus {
+    questionId: number;
+    status: "incomplete" | "A" | "B" | "C" | "D" | "marked";
+}
 
+interface QuestionContainerProps {
+    quizStatus: QuestionStatus[];
+}
+
+export default function QuestionContainer({ quizStatus }: QuestionContainerProps) {
     return (
         <div className="m-4">
             <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-4">
                 <div className="grid grid-cols-4 md:grid-cols-5 gap-2 md:gap-3">
-                    {questions.map((question) => (
+                    {quizStatus.map((question, index) => (
                         <QuestionTile
-                            key={question.number}
-                            number={question.number}
+                            key={question.questionId}
+                            number={index + 1} // Use index + 1 for numbering
                             status={question.status}
-                        // Needs to be fixed when we get the state variable
                         />
                     ))}
                 </div>
@@ -22,17 +25,22 @@ export default function QuestionContainer() {
     );
 }
 
-function QuestionTile({ number, status }: {
-    number: number,
-    status: "attempted" | "marked" | "skipped"
-}) {
+
+
+// Mark for review is currently not implemented!
+interface QuestionTileProps {
+    number: number;
+    status: "incomplete" | "A" | "B" | "C" | "D" | "marked_for_review";
+}
+
+function QuestionTile({ number, status }: QuestionTileProps) {
     // Define styling configurations for each status
     const styleConfig = {
-        attempted: {
-            background: 'bg-green-50',
-            border: 'border-green-200',
-            text: 'text-green-600',
-            hover: 'hover:bg-green-100'
+        incomplete: {
+            background: 'bg-gray-50',
+            border: 'border-gray-200',
+            text: 'text-gray-600',
+            hover: 'hover:bg-gray-100'
         },
         marked: {
             background: 'bg-yellow-50',
@@ -40,15 +48,21 @@ function QuestionTile({ number, status }: {
             text: 'text-yellow-600',
             hover: 'hover:bg-yellow-100'
         },
-        skipped: {
-            background: 'bg-gray-50',
-            border: 'border-gray-200',
-            text: 'text-gray-600',
-            hover: 'hover:bg-gray-100'
+        attempted: {
+            background: 'bg-blue-50',
+            border: 'border-blue-200',
+            text: 'text-blue-600',
+            hover: 'hover:bg-blue-100'
         }
     };
 
-    const style = styleConfig[status] || styleConfig.skipped;
+    // Determine which style to use based on status
+    const style =
+        status === "marked"
+            ? styleConfig.marked
+            : status === "incomplete"
+                ? styleConfig.incomplete
+                : styleConfig.attempted; // All other statuses (A, B, C, D) are considered "attempted"
 
     return (
         <div
@@ -63,4 +77,4 @@ function QuestionTile({ number, status }: {
             </span>
         </div>
     );
-};
+}
