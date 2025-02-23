@@ -7,7 +7,7 @@ export default function ProgressChart({ quiz_status }) {
 
         return (completed / total) * 100;
     }
-    const progress = calculate_progress(quiz_status);
+    const progress = calculate_progress();
     const radius = 24; // Radius of the circle
     const strokeWidth = 8;
     const circumference = 2 * Math.PI * radius;

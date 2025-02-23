@@ -59,6 +59,8 @@ export default function Quiz() {
                 })));
             } catch (error) {
                 console.error('Error fetching questions:', error);
+            } finally {
+                console.log("quiz_status", quizStatus)
             }
         };
 
@@ -68,7 +70,19 @@ export default function Quiz() {
     }, [category_id]);
 
     if (questions.length === 0) {
-        return <div className="mt-15">Loading questions...</div>;
+
+        return (
+            <div className="mt-25 ml-10">
+                <div role="status" className="max-w-sm animate-pulse">
+                    <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                    <span className="sr-only">Loading...</span>
+                </div>
+            </div>);
     }
 
     return (
@@ -84,14 +98,16 @@ export default function Quiz() {
                 </div>
             </div>
 
+            {/* question_text, option_abcd for rendering
+                quizStatus for marking questions.  
+            */}
             <QuestionCard
-                question_number={currentQuestion + 1}
-                total_questions={questions.length}
                 question_text={questions[currentQuestion].question_text}
                 option_a={questions[currentQuestion].option_a}
                 option_b={questions[currentQuestion].option_b}
                 option_c={questions[currentQuestion].option_c}
                 option_d={questions[currentQuestion].option_d}
+            // question_id={}
             />
 
             <QuestionToggle
