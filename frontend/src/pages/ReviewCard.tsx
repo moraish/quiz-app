@@ -1,3 +1,4 @@
+import axios from 'axios';
 import ReviewSummary from "../components/QuizReview/ReviewSummary";
 import QuestionContainer from "../components/QuizReview/QuestionTile";
 import SubmitQuiz from "../components/QuizReview/SubmitQuiz";
@@ -16,6 +17,33 @@ export default function ReviewCard({ quiz_status, onNavigateToQuestion }: Review
     const totalQuestions = quiz_status.length;
     const attemptedQuestions = quiz_status.filter(q => q.status !== "incomplete").length;
     const skippedQuestions = quiz_status.filter(q => q.status === "incomplete").length;
+
+    const handleSubmitQuiz = async () => {
+        try {
+            // Log the data we're sending
+            console.log('Sending quiz data:', quiz_status);
+
+            const response = await axios.post('http://localhost:3000/api/question/score', quiz_status, {
+                // Add headers if needed
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            console.log('Quiz submission response:', response.data);
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.error('Detailed error information:', {
+                    message: error.message,
+                    response: error.response?.data,
+                    status: error.response?.status,
+                    headers: error.response?.headers
+                });
+            } else {
+                console.error('Non-Axios error:', error);
+            }
+        }
+    };
 
     return (
         <div>
@@ -36,7 +64,7 @@ export default function ReviewCard({ quiz_status, onNavigateToQuestion }: Review
                         />
                     </div>
                     <div className="mb-4">
-                        <SubmitQuiz />
+                        <SubmitQuiz onSubmit={handleSubmitQuiz} />
                     </div>
                 </div>
             </div>

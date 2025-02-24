@@ -16,9 +16,8 @@ interface QuestionRow {
     option_d: string;
     category_id: number;
 }
+
 const questionRouter = Router();
-
-
 const prisma = new PrismaClient();
 const upload = multer({ dest: 'uploads/' });
 
@@ -123,5 +122,61 @@ questionRouter.get('/:category_id', async (req: any, res: any) => {
     }
 });
 
+// Define interface for the request body
+interface ScoreItem {
+    questionId: number;
+    status: string;
+}
+
+questionRouter.post('/score', async (req: Request<{}, {}, ScoreItem[]>, res: Response) => {
+    try {
+        const answers = req.body;
+        let correctCount = 0;
+
+        // Fetch all questions with all options in a single query
+        const questions = await prisma.question.findMany({
+            where: {
+                id: {
+                    in: answers.map(a => a.questionId)
+                }
+            },
+            select: {
+                id: true,
+                answer: true,
+                option_a: true,
+                option_b: true,
+                option_c: true,
+                option_d: true
+            }
+        });
+
+        // Create a map for quick lookup
+        const questionMap = new Map(questions.map(q => [q.id, q]));
+
+        // Count correct answers
+        answers.forEach(answer => {
+            const question = questionMap.get(answer.questionId);
+            if (!question || answer.status === 'incomplete') return;
+
+            const selectedOption = {
+                'A': question.option_a,
+                'B': question.option_b,
+                'C': question.option_c,
+                'D': question.option_d
+            }[answer.status];
+
+            if (selectedOption?.toLowerCase() === question.answer.toLowerCase()) {
+                correctCount++;
+            }
+        });
+
+        res.json({ score: correctCount });
+    } catch (error) {
+        res.status(500).json({
+            error: 'Error calculating score',
+            details: error instanceof Error ? error.message : String(error)
+        });
+    }
+});
 
 export default questionRouter;

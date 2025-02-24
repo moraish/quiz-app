@@ -6,7 +6,6 @@ import Leaderboard from "./pages/Leaderboard";
 // import Footer from "./components/Footer";
 import FooterSmall from "./components/FooterSmall";
 import Profile from "./pages/Profile";
-import ReviewCard from "./pages/ReviewCard";
 import Footer from "./components/Landing/Footer";
 import Pricing from "./pages/Pricing";
 import Signup from "./pages/SignUp";
@@ -30,7 +29,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           {/* To be removed */}
-          <Route path="/review" element={<ReviewCard />} />
+          {/* <Route path="/review" element={<ReviewCard />} /> */}
           <Route path="/signinpage" element={<SigninPage />} />
           <Route path="/categories" element={<Categories />} />
         </Routes>

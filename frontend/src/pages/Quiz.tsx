@@ -5,6 +5,7 @@ import QuestionToggle from "../components/QuizQuestions/QuestionToggle";
 import ProgressChart from "../components/QuizQuestions/ProgressChart";
 import ReviewCard from "./ReviewCard";
 
+
 export default function Quiz() {
     const [questions, setQuestions] = useState([]);
     const [currentQuestion, setCurrentQuestion] = useState(0);
