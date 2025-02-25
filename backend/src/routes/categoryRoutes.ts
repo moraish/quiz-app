@@ -19,4 +19,18 @@ categoryRouter.get('/', async (req, res) => {
 });
 
 
+categoryRouter.post('/', async (req, res) => {
+    try {
+        const { categories } = req.body;
+        const createdCategories = await prisma.category.createMany({
+            data: categories.map((name: string) => ({ name })),
+            skipDuplicates: true
+        });
+        res.status(201).json({ created: createdCategories.count });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to create categories' });
+    }
+});
+
+
 export default categoryRouter;
