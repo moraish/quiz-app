@@ -157,6 +157,7 @@ const SigninPage = () => {
                                 <p className="mt-1 text-red-500 text-sm">{errors.password}</p>
                             )}
                         </div>
+
                     </div>
 
                     <div className="flex items-center justify-between">
