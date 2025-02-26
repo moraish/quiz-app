@@ -5,15 +5,13 @@ const API_URL = 'http://localhost:3000/api/leaderboard';
 export interface LeaderboardEntry {
     userId: number;
     points: number;
-    category_id: number;
-    category: {
+    category_id?: number;
+    category?: {
         name: string;
     };
-    user: {
-        firstName: string;
-        lastName: string;
-        institution: string;
-    };
+    firstName: string;
+    lastName: string;
+    institution: string;
 }
 
 export interface ScoreUpdatePayload {
@@ -34,7 +32,6 @@ export interface ScoreUpdateResponse {
  * @returns Promise with leaderboard data
  */
 export const getLeaderboard = async (): Promise<LeaderboardEntry[]> => {
-
     try {
         const token = localStorage.getItem('token');
         const response = await axios.get(API_URL, {
@@ -46,6 +43,50 @@ export const getLeaderboard = async (): Promise<LeaderboardEntry[]> => {
     } catch (error) {
         console.error('Error fetching leaderboard:', error);
         throw new Error('Failed to fetch leaderboard data');
+    }
+};
+
+/**
+ * Fetches the top 10 leaderboard entries for a specific category
+ * @param categoryId - The ID of the category to fetch leaderboard data for
+ * @returns Promise with category-specific leaderboard data
+ */
+export const getCategoryLeaderboard = async (categoryId: number): Promise<LeaderboardEntry[]> => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${API_URL}/category`, {
+            headers: {
+                Authorization: token ? `Bearer ${token}` : '',
+                'Content-Type': 'application/json',
+            },
+            data: { category_id: categoryId }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching category leaderboard:', error);
+        throw new Error('Failed to fetch category leaderboard data');
+    }
+};
+
+/**
+ * Fetches the top 10 leaderboard entries for a specific institution
+ * @param institution - The name of the institution to fetch leaderboard data for
+ * @returns Promise with institution-specific leaderboard data
+ */
+export const getInstitutionLeaderboard = async (institution: string): Promise<LeaderboardEntry[]> => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`${API_URL}/institution`, {
+            headers: {
+                Authorization: token ? `Bearer ${token}` : '',
+                'Content-Type': 'application/json',
+            },
+            data: { institution }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching institution leaderboard:', error);
+        throw new Error('Failed to fetch institution leaderboard data');
     }
 };
 
