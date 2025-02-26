@@ -3,6 +3,7 @@ import categoryRouter from './routes/categoryRoutes';
 import cors from 'cors';
 import questionRouter from './routes/questionRoutes';
 import authRouter from './routes/authRoutes';
+import leaderboardRouter from './routes/leaderboardRotues';
 
 
 const app = express();
@@ -18,6 +19,8 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/categories', categoryRouter);
 app.use('/api/question', questionRouter);
 app.use('/api/auth', authRouter);
+
+app.use('/api/leaderboard', leaderboardRouter);
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
